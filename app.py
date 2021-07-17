@@ -19,8 +19,6 @@ class MyStreamListener(tweepy.StreamListener):
 
     def on_status(self,status):
 
-        # for result in tweepy.Cursor(api.)
-
 
         for tweet in tweepy.Cursor(api.mentions_timeline,nbReplyMax = 1).items():
 
@@ -36,16 +34,18 @@ class MyStreamListener(tweepy.StreamListener):
             usernameMax=''
 
             #################################################################################
+
+
             with open('oldTweets.json','r') as jsonFile:
 
                 data = json.load(jsonFile)
                 for id in data["tweets"]:
 
                     if id["tweetID"] == tweet.id :
-                        flag = True #présent dans le fichier json
+                        flag = True
                         break
                     else :
-                        flag = False #non présent dans le fichier json
+                        flag = False
 
                 jsonFile.close()
 
@@ -54,6 +54,8 @@ class MyStreamListener(tweepy.StreamListener):
             # print(flag)
 
             #################################################################################
+
+
             for l in tweet.text:
                 if(l == '#'): start = 1
                 if(start == 1): hashtag = hashtag + l
@@ -80,7 +82,6 @@ class MyStreamListener(tweepy.StreamListener):
                     break
 
                 if result[1].text.startswith('RT @'): 
-                    # print("C'est un RT")
                     continue
 
             print('idMax =',idMax,'dateMax =',dateMax,'screen_name =',usernameMax)
@@ -93,14 +94,13 @@ class MyStreamListener(tweepy.StreamListener):
             print('fin')
             
 
-            #################################################################################            
+            #################################################################################       
+
+
             with open('oldTweets.json','r+') as jsonFFile:
 
                 if flag == False : 
                     
-                    # print('2')
-
-                    # if tweet.in_reply_to_status_id is None: #le tweet n'est pas un réponse
                     print('pas une réponse')
 
                     data["tweets"].append({"tweetID" : tweet.id,"userID" : api.get_user(tweet.user.screen_name).id_str, "fullText" : tweet.text})
@@ -111,16 +111,11 @@ class MyStreamListener(tweepy.StreamListener):
 
                     json.dump(data,jsonFFile)   
 
-                    # else: #le tweet est un réponse
-                    #     print('erreur')
-                    #     # api.update_status('pas une réponse')
 
                 jsonFile.close()
 
 
-                    
-
 
 myStreamListener = MyStreamListener(api)
 myStream = tweepy.Stream(api.auth, myStreamListener)
-myStream.filter(track=['@SearchForAHT']) ### Filtre les tweets à récupérer avec le mot entre ''
+myStream.filter(track=['@SearchForAHT'])
