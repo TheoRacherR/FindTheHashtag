@@ -6,11 +6,8 @@ access_secret_token = 'ytE1BKs2lNRhxkE7oAl8nbVoJZ7gz6DvXMp6VHfVVb4pL'
 import json
 
 def test():
-    with open('oldTweets.json','r+') as jsonFile:
-        data = json.load(jsonFile)
-        for id in data["tweets"]:
-            print(id["tweetID"])
-        # data[tweets].append(new_data)
-        # json.dump(data,jsonFile,indent=4)
+
+    string = '#esgi'
+    print(string.upper())
 
 # test()
