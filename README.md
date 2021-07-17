@@ -1,8 +1,7 @@
 # Search for a hastag
 ## A python projet of a twitter bot
 
-This bot is gonna listen all the tweets that call it, if there's a #
-And it will answer it with the oldest tweet in the 7 days back from now.
+This bot is gonna listen all the tweets that call it, if there's a #, it will answer it with the oldest tweet in the 7 days back from now.
 
 Create your own bot :
 ```
